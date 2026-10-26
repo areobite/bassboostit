@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0d0e0d">
+  <title>BoostBeat — make it hit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#top"><span class="brand-icon">◉</span> boostbeat<span class="period">.</span></a><span class="local-note"><i></i> YOUR MEDIA STAYS ON YOUR DEVICE</span><a class="help-link" href="#how">How it works <span>↗</span></a></header>
+  <main id="top">
+    <section class="intro"><div class="eyebrow"><span>YOUR PERSONAL SOUND STUDIO</span><span class="eyeline"></span><span>01 — 04</span></div><h1>Make it <em>hit.</em></h1><p>Turn a video or audio file into your next big sound.<br>Pick a vibe, shape the mix, then take it with you.</p></section>
+    <aside class="safety-note"><span>⚠</span><p><b>Easy on the volume.</b> Loud audio can damage your hearing. Start low, increase gradually, and take breaks. The digital output ceiling cannot control your headphone or speaker volume.</p></aside>
+    <section class="studio" aria-label="BoostBeat sound studio">
+      <div class="studio-top"><div class="file-heading"><span class="section-index">01</span><div><b>Bring in a video or track</b><small id="fileMeta">Nothing in the studio yet</small></div></div><button id="changeFile" class="text-btn" hidden>Choose another <span>↗</span></button></div>
+      <label class="dropzone" id="dropzone" for="mediaInput"><input id="mediaInput" type="file" accept="audio/*,video/*"><span class="upload-icon">↥</span><span class="drop-copy"><b>Drop a video or audio file here</b><small>or <u>browse Photos or Files</u> · Common audio and video formats</small></span><span class="file-limit">ON YOUR DEVICE</span></label>
+      <form class="link-row" id="linkForm"><label for="mediaUrl">Or paste a link to a page or media</label><div class="link-input-row"><input id="mediaUrl" type="url" inputmode="url" placeholder="https://…" autocomplete="url" required><button class="small-action" type="submit" id="loadLinkBtn">Load link <span>↗</span></button></div><small>BoostBeat looks for playable audio or video. The page must be public and allow access from your browser.</small></form>
+      <div class="extract-row" id="extractRow" hidden><span>VIDEO SELECTED</span><button id="extractBtn" class="small-action">Extract audio <span>↗</span></button></div>
+      <div class="loaded-track" id="loadedTrack" hidden><div class="track-art"><span>♫</span></div><div class="track-details"><b id="trackName">Track name</b><small id="trackDuration">00:00 · AUDIO</small></div><button id="playBtn" class="play-btn" aria-label="Play audio" disabled>▶</button><div class="wave-wrap"><canvas id="waveform" aria-label="Audio waveform"></canvas><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek position"></div><span id="timeDisplay" class="time-code">00:00</span></div>
+      <div class="studio-divider"></div>
+      <div class="section-head"><div class="file-heading"><span class="section-index">02</span><div><b>Choose your sound</b><small>Quick starts, then make it yours</small></div></div><span class="adjust-label">SOUND STYLE</span></div>
+      <p class="style-note">Styles reshape your existing audio with EQ and reverb. They do not generate new instrument performances.</p>
+      <div class="profiles" role="group" aria-label="Sound style">
+        <button class="profile active" data-profile="bass"><span class="profile-symbol">↯</span><span><b>Bass</b><small>Deep & warm</small></span><span class="profile-check">✓</span></button>
+        <button class="profile" data-profile="guitar"><span class="profile-symbol">⌁</span><span><b>Guitar</b><small>Bright & clear</small></span><span class="profile-check">✓</span></button>
+        <button class="profile" data-profile="drums"><span class="profile-symbol">◉</span><span><b>Drums</b><small>Punchy & tight</small></span><span class="profile-check">✓</span></button>
+        <button class="profile" data-profile="dreamy"><span class="profile-symbol">✳</span><span><b>Dreamy</b><small>Wide & spacious</small></span><span class="profile-check">✓</span></button>
+        <button class="profile" data-profile="custom"><span class="profile-symbol">✎</span><span><b>Custom</b><small>Your own mix</small></span><span class="profile-check">✓</span></button>
+      </div>
+      <div class="controls">
+        <div class="control"><div class="control-label"><span class="control-icon bass-icon">↯</span><div><b>Bass boost</b><small>Low-end lift · +75 dB max</small></div><strong id="bassValue">+3 dB</strong></div><input id="bassSlider" type="range" min="0" max="75" value="3" aria-label="Bass boost in decibels"></div>
+        <div class="control"><div class="control-label"><span class="control-icon reverb-icon">◌</span><div><b>Reverb</b><small>Add a little space</small></div><strong id="reverbValue">12%</strong></div><input id="reverbSlider" type="range" min="0" max="100" value="12" aria-label="Reverb amount"></div>
+        <div class="control"><div class="control-label"><span class="control-icon speed-icon">◷</span><div><b>Speed</b><small>50% slower to 100% faster</small></div><strong id="speedValue">100%</strong></div><input id="speedSlider" type="range" min="50" max="200" value="100" aria-label="Playback speed percentage"></div>
+      </div>
+      <div class="master-row"><div><span class="master-dot"></span><span>PREVIEW MIX</span></div><button id="resetBtn" class="text-btn">Reset adjustments <span>↺</span></button></div>
+      <button id="madeSongBtn" class="export-btn" disabled><span>Made song</span><span class="export-arrow">↓</span></button>
+      <p class="export-note">Creates a WAV file · Processing happens in your browser. On iPhone, choose Save to Files from the share sheet.</p>
+    </section>
+    <section class="photo-reader" aria-labelledby="readerTitle">
+      <div class="section-head"><div class="file-heading"><span class="section-index">04</span><div><b id="readerTitle">Turn a photo into text</b><small>Extract readable text from a photo or scanned page</small></div></div><span class="adjust-label">OCR · ON YOUR DEVICE</span></div>
+      <label class="photo-drop" for="photoInput"><input id="photoInput" type="file" accept="image/*"><span class="upload-icon">▧</span><span class="drop-copy"><b>Choose a photo from Photos or Files</b><small>JPG, PNG, HEIC (if supported by your browser)</small></span></label>
+      <button id="transcribeBtn" class="small-action" type="button" disabled>Transcribe loaded audio or video</button>
+      <div id="ocrProgress" class="ocr-progress" role="status" hidden>Preparing text recognition…</div>
+      <label class="recognized-label" for="recognizedText">Recognized text <span id="ocrStatus">Nothing scanned yet</span></label>
+      <textarea id="recognizedText" rows="8" placeholder="Text from your photo will appear here. You can edit it before saving."></textarea>
+      <div class="reader-actions"><button id="copyTextBtn" class="text-btn" type="button" disabled>Copy text ↗</button><button id="saveTextBtn" class="small-action" type="button" disabled>Save as .txt ↓</button></div>
+      <p class="ocr-note">Photos are processed in your browser. You can also extract speech from the audio of a video selected from Photos. Review results for errors.</p>
+    </section>
+    <section id="how" class="how"><div class="how-title"><span class="section-index">03</span><b>Three steps to your new sound</b></div><div class="steps"><div><span>01</span><p><b>Pick a video, track or link</b><small>Choose from Photos or Files, paste a media link, or try a public page with playable audio.</small></p></div><div><span>02</span><p><b>Shape the sound</b><small>Try a style, adjust bass, reverb and speed, then preview it.</small></p></div><div><span>03</span><p><b>Make your song</b><small>Confirm the listening warning and save your enhanced WAV.</small></p></div></div></section>
+    <section id="terms" class="terms"><h2>Safety & terms</h2><p>BoostBeat processes media locally in your browser. Sound levels vary across headphones, speakers, devices and source files. We cannot measure or guarantee a safe listening level. Keep playback comfortable, start at a low volume, and stop if you feel discomfort.</p><p>By using this tool, you agree that BoostBeat is provided as-is. To the extent permitted by law, BoostBeat is not responsible for injury or damage arising from listening to audio you create. These terms do not limit any rights or liability that cannot legally be excluded.</p></section>
+    <footer><span>BOOSTBEAT <i>·</i> YOUR SOUND, YOUR RULES</span><a href="#terms">Safety & terms</a></footer>
+  </main>
+  <div class="modal-backdrop" id="warningModal" hidden><section class="warning-modal" role="dialog" aria-modal="true" aria-labelledby="warningTitle"><span class="warning-mark">⚠</span><h2 id="warningTitle">One last listen check</h2><p>Be careful! Past this point, you accept that if you are hurt by listening to this audio, we will not be responsible, to the extent permitted by law.</p><p class="modal-reminder">Loud sound can damage your hearing. Keep your device volume low and listen comfortably.</p><div class="modal-actions"><button id="backBtn" class="back-btn">No, take me back to edit audio</button><button id="agreeBtn" class="agree-btn">Yes, I agree</button></div></section></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script src="app.js"></script>
+</body>
+</html>
